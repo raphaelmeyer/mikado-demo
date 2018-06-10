@@ -1,0 +1,3 @@
+[submodule "babystepstimer"]
+	path = babystepstimer
+	url = https://github.com/raphaelmeyer/babystepstimer
