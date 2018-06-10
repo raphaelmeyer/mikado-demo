@@ -1,17 +1,5 @@
 # Mikado Method Demo
 
-## Prepare
-
-    git clone https://github.com/raphaelmeyer/babystepstimer
-    cd babystepstimer/Cpp
-    git checkout -b mikado-example
-
-    git apply ../../snippets/00_setup.patch
-    git add .gitignore build.sh test/test.h
-    git commit -m "setup"
-
-Pointer (sticky note, magnet etc) to visualize current node.
-
 ## Demo
 
 - draw goal : "add first test"
