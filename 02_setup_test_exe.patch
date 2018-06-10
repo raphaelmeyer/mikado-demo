@@ -1,0 +1,32 @@
+diff --git a/Cpp/CMakeLists.txt b/Cpp/CMakeLists.txt
+index 96d5966..4a214d2 100644
+--- a/Cpp/CMakeLists.txt
++++ b/Cpp/CMakeLists.txt
+@@ -26,3 +26,8 @@ target_link_libraries(babystepstimer
+ configure_file(../CSharp/BabyStepTimer/Resources/2166__suburban-grilla__bowl-struck.wav ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+ configure_file(../CSharp/BabyStepTimer/Resources/32304__acclivity__shipsbell.wav ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+ 
++add_executable(test test/main.cc)
++target_link_libraries(test PRIVATE babystepstimer-lib)
++target_include_directories(test PRIVATE src)
++
++add_custom_target(run-tests ALL COMMAND test)
+diff --git a/Cpp/test/main.cc b/Cpp/test/main.cc
+new file mode 100644
+index 0000000..4b59f61
+--- /dev/null
++++ b/Cpp/test/main.cc
+@@ -0,0 +1,13 @@
++#include "test.h"
++
++auto const scenarios = {
++  Scenario{
++    "Dummy scenario",
++    []{
++      assert_that(false);
++  }}
++};
++
++int main() {
++  return TestRunner().run(scenarios);
++}

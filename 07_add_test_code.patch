@@ -1,0 +1,36 @@
+diff --git a/Cpp/test/main.cc b/Cpp/test/main.cc
+index 2386bfb..2b7f592 100644
+--- a/Cpp/test/main.cc
++++ b/Cpp/test/main.cc
+@@ -2,6 +2,8 @@
+ 
+ #include "test.h"
+ 
++#include <thread>
++
+ std::string ui_text(BabystepsTimer const & testee) {
+   return testee.timerWidget.toPlainText().toStdString();
+ }
+@@ -12,9 +14,20 @@ void click(BabystepsTimer & testee, QString const & command) {
+ 
+ auto const scenarios = {
+   Scenario{
+-    "Dummy scenario",
++    "BabystepsTimer is set to two minutes when created.",
+     []{
+-      assert_that(true);
++      BabystepsTimer testee;
++
++      std::thread test_thread{[&testee]{
++        std::this_thread::sleep_for(std::chrono::milliseconds(200));
++
++        assert_that(ui_text(testee).find("02:01") != std::string::npos);
++
++        click(testee, "quit");
++      }};
++
++      testee.exec(0, nullptr);
++      test_thread.join();
+   }}
+ };
+ 

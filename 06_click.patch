@@ -1,0 +1,15 @@
+diff --git a/Cpp/test/main.cc b/Cpp/test/main.cc
+index 47b7c1b..2386bfb 100644
+--- a/Cpp/test/main.cc
++++ b/Cpp/test/main.cc
+@@ -6,6 +6,10 @@ std::string ui_text(BabystepsTimer const & testee) {
+   return testee.timerWidget.toPlainText().toStdString();
+ }
+ 
++void click(BabystepsTimer & testee, QString const & command) {
++  emit testee.timerWidget.anchorClicked(QString{"command://" + command});
++}
++
+ auto const scenarios = {
+   Scenario{
+     "Dummy scenario",

@@ -1,0 +1,68 @@
+diff --git a/Cpp/.gitignore b/Cpp/.gitignore
+index 9f63b71..4665391 100644
+--- a/Cpp/.gitignore
++++ b/Cpp/.gitignore
+@@ -1 +1,2 @@
+ /cmake-build-*/
++/build-*/
+diff --git a/Cpp/build.sh b/Cpp/build.sh
+new file mode 100755
+index 0000000..4db60f2
+--- /dev/null
++++ b/Cpp/build.sh
+@@ -0,0 +1,17 @@
++#!/bin/bash
++
++DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
++
++mkdir -p ${DIR}/build-gcc
++mkdir -p ${DIR}/build-clang
++
++cd ${DIR}/build-gcc
++CC=gcc CXX=g++ cmake -G Ninja ${DIR}
++
++cd ${DIR}/build-clang
++CC=clang CXX=clang++ cmake -G Ninja ${DIR}
++
++cd ${DIR}
++cmake --build ${DIR}/build-gcc
++cmake --build ${DIR}/build-clang
++
+diff --git a/Cpp/test/test.h b/Cpp/test/test.h
+new file mode 100644
+index 0000000..f0d7641
+--- /dev/null
++++ b/Cpp/test/test.h
+@@ -0,0 +1,32 @@
++#include <iostream>
++#include <functional>
++
++void assert_that(bool cond) {
++  if(not cond) {
++    throw std::exception{};
++  }
++}
++
++struct Scenario {
++  std::string name;
++  std::function<void()> run;
++};
++
++class TestRunner {
++public:
++  template<typename T>
++  int run(T const & tests) {
++    bool failure = false;
++    for(auto const & test : tests) {
++      try {
++        test.run();
++        std::cout << "\033[0;32m[ OK ]\033[0m " << test.name << "\n";
++      } catch(...) {
++        std::cout << "\033[0;31m[FAIL]\033[0m " << test.name << "\n";
++        failure = true;
++      }
++    }
++    return (failure ? 1 : 0);
++  }
++};
++
