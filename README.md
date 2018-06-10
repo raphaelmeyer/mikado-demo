@@ -1,5 +1,14 @@
 # Mikado Method Demo
 
+## Prepare
+
+    ./prepare.sh
+
+
+## Reset
+
+    ./reset.sh
+
 ## Demo
 
 - draw goal : "add first test"
@@ -70,11 +79,3 @@
 ### 08 timer widget lifetime
 
 
-
-## Reset
-
-    git reset --hard 0bd1d4b1
-
-## milliseconds
-
-    git log master..
