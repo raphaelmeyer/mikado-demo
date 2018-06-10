@@ -1,0 +1,48 @@
+diff --git a/Cpp/src/BabystepsTimer.cpp b/Cpp/src/BabystepsTimer.cpp
+index 4c3ee48..3d8db63 100644
+--- a/Cpp/src/BabystepsTimer.cpp
++++ b/Cpp/src/BabystepsTimer.cpp
+@@ -3,10 +3,8 @@
+ #include <QtEvents>
+ #include <QtMultimedia/QSound>
+ #include <QtWidgets/QApplication>
+-#include <QtWidgets/QTextBrowser>
+ 
+ #include <thread>
+-#include <memory>
+ 
+ static const long SECONDS_IN_CYCLE = 120;
+ 
+@@ -33,7 +31,7 @@ int BabystepsTimer::exec(int argc, char * argv[]) {
+   window.setWindowTitle("Babysteps Timer");
+   window.setFixedSize(250, 120);
+ 
+-  std::unique_ptr<QTextBrowser> timerWidget{new QTextBrowser()};
++  timerWidget.reset(new QTextBrowser());
+ 
+   timerWidget->setParent(&window);
+   timerWidget->setOpenLinks(false);
+diff --git a/Cpp/src/BabystepsTimer.h b/Cpp/src/BabystepsTimer.h
+index bd19006..1d57169 100644
+--- a/Cpp/src/BabystepsTimer.h
++++ b/Cpp/src/BabystepsTimer.h
+@@ -1,8 +1,10 @@
+ #pragma once
+ 
+ #include <QtCore/QObject>
++#include <QtWidgets/QTextBrowser>
+ 
+ #include <chrono>
++#include <memory>
+ #include <string>
+ 
+ class BabystepsTimer : public QObject {
+@@ -12,6 +14,8 @@ class BabystepsTimer : public QObject {
+ public:
+   int exec(int argc, char * argv[]);
+ 
++  std::unique_ptr<QTextBrowser> timerWidget;
++
+ signals:
+   void updateGui(QString const & text);
+   void playSound(QString const & filename);

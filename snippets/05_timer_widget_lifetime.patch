@@ -1,0 +1,68 @@
+diff --git a/Cpp/src/BabystepsTimer.cpp b/Cpp/src/BabystepsTimer.cpp
+index bae7dfd..4c3ee48 100644
+--- a/Cpp/src/BabystepsTimer.cpp
++++ b/Cpp/src/BabystepsTimer.cpp
+@@ -6,6 +6,7 @@
+ #include <QtWidgets/QTextBrowser>
+ 
+ #include <thread>
++#include <memory>
+ 
+ static const long SECONDS_IN_CYCLE = 120;
+ 
+@@ -32,11 +33,12 @@ int BabystepsTimer::exec(int argc, char * argv[]) {
+   window.setWindowTitle("Babysteps Timer");
+   window.setFixedSize(250, 120);
+ 
+-  QTextBrowser timerWidget;
+-  timerWidget.setParent(&window);
+-  timerWidget.setOpenLinks(false);
+-  timerWidget.setReadOnly(true);
+-  timerWidget.setTextInteractionFlags(timerWidget.textInteractionFlags() & (~Qt::TextSelectableByMouse));
++  std::unique_ptr<QTextBrowser> timerWidget{new QTextBrowser()};
++
++  timerWidget->setParent(&window);
++  timerWidget->setOpenLinks(false);
++  timerWidget->setReadOnly(true);
++  timerWidget->setTextInteractionFlags(timerWidget->textInteractionFlags() & (~Qt::TextSelectableByMouse));
+ 
+   dragWindow = [&](QObject * obj, QEvent * event) {
+     if(event->type() == QEvent::MouseButtonPress) {
+@@ -56,17 +58,17 @@ int BabystepsTimer::exec(int argc, char * argv[]) {
+ 
+   application.installEventFilter(this);
+ 
+-  QObject::connect(this, &BabystepsTimer::updateGui, this, [&](QString const & text) { timerWidget.setHtml(text); });
++  QObject::connect(this, &BabystepsTimer::updateGui, this, [&](QString const & text) { timerWidget->setHtml(text); });
+   QObject::connect(this, &BabystepsTimer::playSound, this, [&](QString const & filename) { QSound::play(filename); });
+ 
+-  QObject::connect(&timerWidget, &QTextBrowser::anchorClicked, this, [&](QUrl url) {
++  QObject::connect(timerWidget.get(), &QTextBrowser::anchorClicked, this, [&](QUrl url) {
+     if(url.url() == "command://start") {
+-      timerWidget.setHtml(
++      timerWidget->setHtml(
+         QString::fromStdString(createTimerHtml(getRemainingTimeCaption(0L), BACKGROUND_COLOR_NEUTRAL, true)));
+       std::thread([this] { timerThread(); }).detach();
+     } else if(url.url() == "command://stop") {
+       timerRunning = false;
+-      timerWidget.setHtml(
++      timerWidget->setHtml(
+         QString::fromStdString(createTimerHtml(getRemainingTimeCaption(0L), BACKGROUND_COLOR_NEUTRAL, false)));
+     } else if(url.url() == "command://reset") {
+       currentCycleStartTime = Clock::now();
+@@ -76,11 +78,13 @@ int BabystepsTimer::exec(int argc, char * argv[]) {
+     }
+   });
+ 
+-  timerWidget.setHtml(
++  timerWidget->setHtml(
+     QString::fromStdString(createTimerHtml(getRemainingTimeCaption(0L), BACKGROUND_COLOR_NEUTRAL, false)));
+ 
+   window.show();
+-  return application.exec();
++  auto const exit_code = application.exec();
++  timerWidget.reset();
++  return exit_code;
+ }
+ 
+ bool BabystepsTimer::eventFilter(QObject * obj, QEvent * event) {

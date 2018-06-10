@@ -1,5 +1,5 @@
 diff --git a/Cpp/test/main.cc b/Cpp/test/main.cc
-index 9f50a65..47b7c1b 100644
+index 9f50a65..f1df7c9 100644
 --- a/Cpp/test/main.cc
 +++ b/Cpp/test/main.cc
 @@ -1,5 +1,11 @@
@@ -8,7 +8,7 @@ index 9f50a65..47b7c1b 100644
  #include "test.h"
  
 +std::string ui_text(BabystepsTimer const & testee) {
-+  return testee.timerWidget.toPlainText().toStdString();
++  return testee.timerWidget->toPlainText().toStdString();
 +}
 +
  auto const scenarios = {

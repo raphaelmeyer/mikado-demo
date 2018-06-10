@@ -67,15 +67,39 @@
     git apply ../../snippets/04_expose_timer_widget.patch
     git diff
     ./build.sh
+    ./build-clang/babystepstimer
+
+- draw node : "timer widget lifetime"
+
+    git reset --hard HEAD
+
+### 05 timer widget lifetime
+
+    git apply ../../snippets/05_timer_widget_lifetime.patch
+    git diff
+    ./build.sh
+    ./build-clang/babystepstimer
+
+    git add src/BabystepsTimer.cpp
+    git commit -m "timer widget lifetime"
+
+- tick off "timer widget lifetime"
+
+### 06 expose timer widget
+
+    git apply ../../snippets/06_expose_timer_widget.patch
+    git diff
+    ./build.sh
+    ./build-clang/babystepstimer
 
     git add src/
     git commit -m "expose timer widget"
 
 - tick off "expose timer widget"
 
-### 05 ui_text
+### 07 ui_text
 
-    git apply ../../snippets/05_ui_text.patch
+    git apply ../../snippets/07_ui_text.patch
     git diff
     ./build.sh
 
@@ -84,9 +108,9 @@
 
 - tick off "ui_text"
 
-### 06 click
+### 08 click
 
-    git apply ../../snippets/06_click.patch
+    git apply ../../snippets/08_click.patch
     git diff
     ./build.sh
 
@@ -95,17 +119,33 @@
 
 - tick off "click"
 
-### 07 add test code
+### 09 add test code
 
-    git apply ../../snippets/07_add_test_code.patch
+    git apply ../../snippets/09_add_test_code.patch
     git diff
     ./build.sh
 
-- draw node : "timer widget lifetime"
+- draw node : "replace exit()"
 
     git reset --hard HEAD
 
-### 08 timer widget lifetime
+### 10 replace exit()
 
+    git apply ../../snippets/10_replace_exit.patch
+    ./build.sh
+    ./build-clang/babystepstimer
 
+    git add src/BabystepsTimer.cpp
+    git commit -m "replace exit()"
+
+### 11 add test code
+
+    git apply ../../snippets/11_add_test_code.patch
+    ./build.sh
+
+    git add test/main.cc
+    git commit -m "add test code"
+
+- tick off : "add test code"
+- tick off goal
 
