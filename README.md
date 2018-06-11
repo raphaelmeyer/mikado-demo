@@ -2,15 +2,15 @@
 
 ## General
 
-### Prepare
+**prepare**
 
     ./prepare.sh
 
-### Reset
+**reset**
 
     ./reset.sh
 
-### Show log
+**show log**
 
     git log master..
 
@@ -21,8 +21,9 @@
     ./build.sh
     ./build-clang/babystepstimer
 
-- draw goal : "add first test"
-- draw node : "add test code"
+* draw goal : "add first test"
+* draw node : "add test code"
+
 
 ### 01 add test code
 
@@ -30,12 +31,13 @@
     git add test/main.cc
     git diff --cached
 
-- draw node : "setup test exe"
-- draw node : "ui_text"
-- draw node : "click"
+* draw node : "setup test exe"
+* draw node : "ui_text"
+* draw node : "click"
 
     git reset --hard HEAD
     git clean -f -d
+
 
 ### 02 setup test exe
 
@@ -44,13 +46,14 @@
     git diff --cached
     ./build.sh
 
-- change assert(false) -> assert(true)
+* change assert(false) -> assert(true)
 
     ./build.sh
     git add test/main.cc
     git commit -m "setup test exe"
 
-- tick off "setup test exe"
+* tick off "setup test exe"
+
 
 ### 03 ui_text
 
@@ -58,9 +61,10 @@
     git diff
     ./build.sh
 
-- draw node : "expose timer widget"
+* draw node : "expose timer widget"
 
     git reset --hard HEAD
+
 
 ### 04 expose timer widget
 
@@ -69,9 +73,10 @@
     ./build.sh
     ./build-clang/babystepstimer
 
-- draw node : "timer widget lifetime"
+* draw node : "timer widget lifetime"
 
     git reset --hard HEAD
+
 
 ### 05 timer widget lifetime
 
@@ -83,7 +88,8 @@
     git add src/BabystepsTimer.cpp
     git commit -m "timer widget lifetime"
 
-- tick off "timer widget lifetime"
+* tick off "timer widget lifetime"
+
 
 ### 06 expose timer widget
 
@@ -95,7 +101,8 @@
     git add src/
     git commit -m "expose timer widget"
 
-- tick off "expose timer widget"
+* tick off "expose timer widget"
+
 
 ### 07 ui_text
 
@@ -106,7 +113,8 @@
     git add test/
     git commit -m "ui_text"
 
-- tick off "ui_text"
+* tick off "ui_text"
+
 
 ### 08 click
 
@@ -117,7 +125,8 @@
     git add test/
     git commit -m "click"
 
-- tick off "click"
+* tick off "click"
+
 
 ### 09 add test code
 
@@ -125,9 +134,10 @@
     git diff
     ./build.sh
 
-- draw node : "replace exit()"
+* draw node : "replace exit()"
 
     git reset --hard HEAD
+
 
 ### 10 replace exit()
 
@@ -138,6 +148,7 @@
     git add src/BabystepsTimer.cpp
     git commit -m "replace exit()"
 
+
 ### 11 add test code
 
     git apply ../../snippets/11_add_test_code.patch
@@ -146,5 +157,5 @@
     git add test/main.cc
     git commit -m "add test code"
 
-- tick off : "add test code"
-- tick off goal
+* tick off : "add test code"
+* tick off goal
