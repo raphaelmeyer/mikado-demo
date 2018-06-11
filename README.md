@@ -47,7 +47,7 @@
 - change assert(false) -> assert(true)
 
     ./build.sh
-    git add test/main.cc CMakeLists.txt
+    git add test/main.cc
     git commit -m "setup test exe"
 
 - tick off "setup test exe"
@@ -148,4 +148,3 @@
 
 - tick off : "add test code"
 - tick off goal
-

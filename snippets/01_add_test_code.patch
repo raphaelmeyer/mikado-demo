@@ -1,9 +1,9 @@
 diff --git a/Cpp/test/main.cc b/Cpp/test/main.cc
 new file mode 100644
-index 0000000..bbc2c29
+index 0000000..a73b0e2
 --- /dev/null
 +++ b/Cpp/test/main.cc
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,29 @@
 +#include <BabystepsTimer.h>
 +
 +#include "test.h"
@@ -16,13 +16,17 @@ index 0000000..bbc2c29
 +    []{
 +      BabystepsTimer testee;
 +
-+      std::thread test_thread{[&testee]{
-+        assert_that(ui_text(testee).find("02:00") != std::string::npos);
++      bool is_two_minutes = false;
++
++      std::thread test_thread{[&]{
++        is_two_minutes = ui_text(testee).find("02:00") != std::string::npos;
 +        click(testee, "quit");
 +      }};
 +
 +      testee.exec(0, nullptr);
 +      test_thread.join();
++
++      assert_that(is_two_minutes);
 +  }}
 +};
 +
