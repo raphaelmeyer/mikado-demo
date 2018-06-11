@@ -21,6 +21,7 @@
     ./build.sh
     ./build-clang/babystepstimer
 
+
 * draw goal : "add first test"
 * draw node : "add test code"
 
@@ -31,9 +32,11 @@
     git add test/main.cc
     git diff --cached
 
+
 * draw node : "setup test exe"
 * draw node : "ui_text"
 * draw node : "click"
+
 
     git reset --hard HEAD
     git clean -f -d
@@ -46,11 +49,14 @@
     git diff --cached
     ./build.sh
 
+
 * change assert(false) -> assert(true)
+
 
     ./build.sh
     git add test/main.cc
     git commit -m "setup test exe"
+
 
 * tick off "setup test exe"
 
@@ -61,7 +67,9 @@
     git diff
     ./build.sh
 
+
 * draw node : "expose timer widget"
+
 
     git reset --hard HEAD
 
@@ -73,7 +81,9 @@
     ./build.sh
     ./build-clang/babystepstimer
 
+
 * draw node : "timer widget lifetime"
+
 
     git reset --hard HEAD
 
@@ -85,8 +95,10 @@
     ./build.sh
     ./build-clang/babystepstimer
 
+
     git add src/BabystepsTimer.cpp
     git commit -m "timer widget lifetime"
+
 
 * tick off "timer widget lifetime"
 
@@ -98,8 +110,10 @@
     ./build.sh
     ./build-clang/babystepstimer
 
+
     git add src/
     git commit -m "expose timer widget"
+
 
 * tick off "expose timer widget"
 
@@ -110,8 +124,10 @@
     git diff
     ./build.sh
 
+
     git add test/
     git commit -m "ui_text"
+
 
 * tick off "ui_text"
 
@@ -122,8 +138,10 @@
     git diff
     ./build.sh
 
+
     git add test/
     git commit -m "click"
+
 
 * tick off "click"
 
@@ -134,7 +152,9 @@
     git diff
     ./build.sh
 
+
 * draw node : "replace exit()"
+
 
     git reset --hard HEAD
 
@@ -145,6 +165,7 @@
     ./build.sh
     ./build-clang/babystepstimer
 
+
     git add src/BabystepsTimer.cpp
     git commit -m "replace exit()"
 
@@ -154,8 +175,10 @@
     git apply ../../snippets/11_add_test_code.patch
     ./build.sh
 
+
     git add test/main.cc
     git commit -m "add test code"
+
 
 * tick off : "add test code"
 * tick off goal
