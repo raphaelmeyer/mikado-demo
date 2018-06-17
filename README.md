@@ -31,9 +31,9 @@ cd babystepstimer/Cpp/
 ### 01 add test code
 
 ```
-  git apply ../../snippets/01_add_test_code.patch
-  git add test/main.cc
-  git diff --cached
+git apply ../../snippets/01_add_test_code.patch
+git add test/main.cc
+git diff --cached
 ```
 
 * draw node : "setup test exe"
